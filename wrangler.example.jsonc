@@ -44,17 +44,17 @@
 		"crons": ["17 3 * * *"]
 	},
 	// Email Routing rules owned by this Worker, applied on `wrangler deploy`.
-	// "*@<domain>" is the catch-all: every address at the domain reaches email() below.
-	// Must match EMAIL_DOMAINS. (Newer wrangler feature; editors may flag it against the JSON schema.)
-	"addresses": ["*@REPLACE_ME.example.com"],
+	// This fork is pinned to one shared inbox, so the rule is a literal address
+	// rather than the upstream catch-all.
+	"addresses": ["agent@prdai.dev"],
 	// Configuration -------------------------------------------------------
 	// Secrets (set with `wrangler secret put <NAME>`, never in this file):
 	//   API_KEY          required — bearer token for the REST API and MCP endpoint
 	"vars": {
 		// Comma-separated list of domains this Worker accepts mail for and may send from.
-		"EMAIL_DOMAINS": "REPLACE_ME.example.com",
+		"EMAIL_DOMAINS": "prdai.dev",
 		// Days to keep messages. 0 = keep forever.
-		"RETENTION_DAYS": "30",
+		"RETENTION_DAYS": "7",
 		// Auto-create an inbox row for any address at EMAIL_DOMAINS ("true"), or
 		// reject mail for addresses that were not created via POST /inboxes ("false").
 		"ALLOW_UNKNOWN_INBOX": "true",
@@ -70,7 +70,7 @@
 		// only agent-abc123@yourdomain.com); everything else is forwarded to
 		// FORWARD_UNMATCHED_TO, or rejected if that's unset. Leave both empty to ingest
 		// all mail (the default).
-		"ADDRESS_MATCH_PATTERN": "",
+		"ADDRESS_MATCH_PATTERN": "^agent$",
 		// Must be a destination address you have already verified in Cloudflare
 		// Email Routing (Dashboard -> Email -> Destination addresses); forwarding to an
 		// unverified address fails.

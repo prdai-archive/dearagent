@@ -7,6 +7,10 @@ description: Give an AI agent its own email address and let it receive, read, wa
 
 DearAgent is a self-hosted email server for agents, running on the operator's Cloudflare account. You talk to it either through its MCP server (tools named below) or its REST API (same operations, same shapes). One bearer key grants access to every inbox on the server, so treat any inbox you did not create as someone else's.
 
+## This deployment
+
+This fork serves a single shared inbox: `agent@prdai.dev` on `prdai.dev`. The address already exists, so there is no need to call `create_inbox`; use `agent@prdai.dev` as the inbox id. Only local parts matching `^agent$` are accepted, other mail to the domain is rejected, and mail is retained for 7 days.
+
 ## Connect
 
 MCP, from Claude Code:
