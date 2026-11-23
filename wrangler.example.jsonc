@@ -76,6 +76,6 @@
 		// unverified address fails.
 		"FORWARD_UNMATCHED_TO": ""
 	}
-	// Optional: serve the API on your own hostname.
-	// "routes": [{ "pattern": "mail-api.example.com", "custom_domain": true }]
+	// Serve the API on the fork's hostname.
+	"routes": [{ "pattern": "dearagent.prdai.dev", "custom_domain": true }]
 }
